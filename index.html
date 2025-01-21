@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nigerian Port Authority Training Portal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts for Better Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css">
+    <!-- Custom Styles -->
+    <style>
+        /* General Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('npa.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-header .logo img {
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-header .logo img:hover {
+            transform: rotate(360deg);
+        }
+
+        .dashboard-header p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            margin-top: 40px;
+        }
+
+        .row {
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            color: #fff;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(40, 167, 69, 0.2), rgba(33, 136, 56, 0.2));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .btn-primary,
+        .btn-secondary {
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #218838, #28a745);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #5a6268, #6c757d);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Icons in Cards */
+        .card-icon {
+            font-size: 2.5rem;
+            color: #28a745;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+            color: #218838;
+        }
+
+        /* Calendar Section */
+        #calendar-container {
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        #calendar-container h5 {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            margin-top: auto;
+            font-size: 14px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .card {
+                margin-bottom: 20px;
+            }
+
+            .dashboard-header p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <p class="logo">
+            <img src="npa.jpg" alt="NPA Logo"> Nigerian Ports Authority Training Portal
+        </p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row text-center">
+            <!-- Add Participant Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fas fa-user-plus card-icon"></i>
+                        <h5 class="card-title">Add Participant</h5>
+                        <p class="card-text">Add new participant to the training program.</p>
+                        <a href="add_user.php" class="btn btn-primary">Go to Form</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Participants Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fas fa-users card-icon"></i>
+                        <h5 class="card-title">View Participants</h5>
+                        <p class="card-text">View and manage participant records.</p>
+                        <a href="view_users.php" class="btn btn-primary">View Records</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Login Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fas fa-lock card-icon"></i>
+                        <h5 class="card-title">For Admin</h5>
+                        <p class="card-text">Access admin dashboard.</p>
+                        <a href="login.php" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-alt card-icon"></i>
+                        <h5 class="card-title">Calendar</h5>
+                        <p class="card-text">View and manage training schedules.</p>
+                        <a href="calendar_app/index.html" class="btn btn-primary">Open Calendar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Designed by <a href="https://kingjothan.netlify.app/" target="_blank" rel="noopener noreferrer">Okoiruele Jonathan Oseremen</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
