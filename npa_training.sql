@@ -8,16 +8,17 @@ CREATE TABLE participants (
     personal_number VARCHAR(50) NOT NULL,
     designation VARCHAR(100),
     location VARCHAR(100),
+    venue VARCHAR(255), -- Added Venue field
     training_description TEXT,
     start_date DATE NOT NULL,
     completion_date DATE NOT NULL,
     number_of_days INT NOT NULL,
     status VARCHAR(50) NOT NULL,
     training_type VARCHAR(50) NOT NULL,
-    total_cost_of_participation DECIMAL(10, 2),
+    total_cost_of_participation DECIMAL(19, 2),
     oracle_number VARCHAR(255), -- New field: Oracle Number
     consultant_name VARCHAR(255), -- New field: Name of Consultant
-    consultation_amount DECIMAL(10, 2), -- New field: Amount for Consultation
+    consultation_amount DECIMAL(19, 2), -- New field: Amount for Consultation
     remark TEXT,
     INDEX idx_name (name), -- Index for faster searches by name
     INDEX idx_personal_number (personal_number), -- Index for personal number

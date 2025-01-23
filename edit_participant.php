@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fields = [
         'name', 'personal_number', 'designation', 'location', 'training_description', 
         'start_date', 'completion_date', 'number_of_days', 'status', 'training_type', 
-        'total_cost_of_participation', 'remark', 'oracle_number', 'consultant_name', 'consultation_amount'
+        'total_cost_of_participation', 'remark', 'oracle_number', 'consultant_name', 'consultation_amount', 'venue'
     ];
 
     $data = [];
@@ -53,7 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         remark = :remark,
         oracle_number = :oracle_number,
         consultant_name = :consultant_name,
-        consultation_amount = :consultation_amount
+        consultation_amount = :consultation_amount,
+        venue = :venue
         WHERE id = :id");
 
     $data['id'] = $id;
@@ -196,6 +197,9 @@ function escape($data) {
 
             <label for="location">Location</label>
             <input type="text" id="location" name="location" value="<?= escape($participant['location']) ?>" required>
+
+            <label for="venue">Venue</label> <!-- Added Venue field -->
+            <input type="text" id="venue" name="venue" value="<?= escape($participant['venue']) ?>" required>
 
             <label for="training_description">Training Description</label>
             <textarea id="training_description" name="training_description" rows="3" required><?= escape($participant['training_description']) ?></textarea>

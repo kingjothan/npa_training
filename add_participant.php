@@ -28,16 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oracle_number = $_POST['oracle_number'] ?? '';
     $consultant_name = $_POST['consultant_name'] ?? '';
     $consultation_amount = $_POST['consultation_amount'] ?? '';
+    $venue = $_POST['venue'] ?? ''; // Added Venue field
 
     // Insert data into the database
     $sql = "INSERT INTO participants (
                 name, personal_number, designation, location, training_description, 
                 start_date, completion_date, number_of_days, status, training_type, 
-                total_cost_of_participation, remark, oracle_number, consultant_name, consultation_amount
+                total_cost_of_participation, remark, oracle_number, consultant_name, consultation_amount, venue
             ) VALUES (
                 :name, :personal_number, :designation, :location, :training_description, 
                 :start_date, :completion_date, :number_of_days, :status, :training_type, 
-                :total_cost_of_participation, :remark, :oracle_number, :consultant_name, :consultation_amount
+                :total_cost_of_participation, :remark, :oracle_number, :consultant_name, :consultation_amount, :venue
             )";
 
     $stmt = $pdo->prepare($sql);
@@ -57,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':oracle_number', $oracle_number);
     $stmt->bindParam(':consultant_name', $consultant_name);
     $stmt->bindParam(':consultation_amount', $consultation_amount);
+    $stmt->bindParam(':venue', $venue); // Added Venue field
 
     if ($stmt->execute()) {
         header('Location: admin_dashboard.php');
@@ -192,6 +194,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="location">Location</label>
             <input type="text" id="location" name="location" required>
+
+            <label for="venue">Venue</label> <!-- Added Venue field -->
+            <input type="text" id="venue" name="venue" required>
 
             <label for="training_description">Training Description</label>
             <textarea id="training_description" name="training_description" rows="4" required></textarea>

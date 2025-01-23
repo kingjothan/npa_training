@@ -431,6 +431,7 @@ function escape($data) {
                     <th>Personal Number</th>
                     <th>Designation</th>
                     <th>Location</th>
+                    <th>Venue</th> <!-- Added Venue field -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -442,6 +443,7 @@ function escape($data) {
                             <td><?= escape($participant['personal_number']) ?></td>
                             <td><?= escape($participant['designation']) ?></td>
                             <td><?= escape($participant['location']) ?></td>
+                            <td><?= escape($participant['venue']) ?></td> <!-- Added Venue field -->
                             <td class="actions">
                                 <a href="edit_participant.php?id=<?= escape($participant['id']) ?>" class="edit">Edit</a>
                                 <a href="?delete=<?= escape($participant['id']) ?>" class="delete" onclick="return confirm('Are you sure?')">Delete</a>
@@ -450,7 +452,7 @@ function escape($data) {
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6">No participants found.</td>
+                        <td colspan="7">No participants found.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oracle_number = sanitizeInput($_POST['oracle_number'] ?? '');
     $consultant_name = sanitizeInput($_POST['consultant_name'] ?? '');
     $consultation_amount = sanitizeInput($_POST['consultation_amount'] ?? '');
+    $venue = sanitizeInput($_POST['venue'] ?? ''); // Added Venue field
 
     // Check if personal_number already exists
     $checkSql = "SELECT COUNT(*) FROM participants WHERE personal_number = :personal_number";
@@ -57,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO participants (
                     name, personal_number, designation, location, training_description, 
                     start_date, completion_date, number_of_days, status, training_type, 
-                    total_cost_of_participation, remark, oracle_number, consultant_name, consultation_amount
+                    total_cost_of_participation, remark, oracle_number, consultant_name, consultation_amount, venue
                 ) VALUES (
                     :name, :personal_number, :designation, :location, :training_description, 
                     :start_date, :completion_date, :number_of_days, :status, :training_type, 
-                    :total_cost_of_participation, :remark, :oracle_number, :consultant_name, :consultation_amount
+                    :total_cost_of_participation, :remark, :oracle_number, :consultant_name, :consultation_amount, :venue
                 )";
 
         $stmt = $pdo->prepare($sql);
@@ -81,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':oracle_number', $oracle_number);
         $stmt->bindParam(':consultant_name', $consultant_name);
         $stmt->bindParam(':consultation_amount', $consultation_amount);
+        $stmt->bindParam(':venue', $venue); // Added Venue field
 
         if ($stmt->execute()) {
             $_SESSION['success_message'] = "Participant added successfully!";
@@ -250,6 +252,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="venue" class="form-label">Venue</label> <!-- Added Venue field -->
+                    <input type="text" name="venue" id="venue" class="form-control" placeholder="Enter venue" required>
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="training_description" class="form-label">Training Description</label>
                 <input name="training_description" id="training_description" class="form-control" rows="4" placeholder="Enter training description">
@@ -340,8 +349,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var oracleNumber = document.getElementById('oracle_number').value;
             var consultantName = document.getElementById('consultant_name').value;
             var consultationAmount = document.getElementById('consultation_amount').value;
+            var venue = document.getElementById('venue').value; // Added Venue field
 
-            if (name === "" || personalNumber === "" || startDate === "" || completionDate === "" || totalCost === "" || oracleNumber === "" || consultantName === "" || consultationAmount === "") {
+            if (name === "" || personalNumber === "" || startDate === "" || completionDate === "" || totalCost === "" || oracleNumber === "" || consultantName === "" || consultationAmount === "" || venue === "") {
                 isValid = false;
                 toastr.error('Please fill out all required fields correctly.');
             }

@@ -342,6 +342,7 @@ $total_consultation_amount_all = 0; // New variable for total consultation amoun
                     <th>Name</th>
                     <th>Personal Number</th>
                     <th>Location</th>
+                    <th>Venue</th> <!-- Added Venue field -->
                     <th>Status</th>
                     <th>Training Description</th>
                     <th>Total Cost</th>
@@ -361,6 +362,7 @@ $total_consultation_amount_all = 0; // New variable for total consultation amoun
                             <td><?= htmlspecialchars($row['name']) ?></td>
                             <td><?= htmlspecialchars($row['personal_number']) ?></td>
                             <td><?= htmlspecialchars($row['location']) ?></td>
+                            <td><?= htmlspecialchars($row['venue']) ?></td> <!-- Added Venue field -->
                             <td><?= htmlspecialchars($row['status']) ?></td>
                             <td><?= htmlspecialchars($row['training_description']) ?></td>
                             <td><?= number_format($total_cost, 2) ?></td>
