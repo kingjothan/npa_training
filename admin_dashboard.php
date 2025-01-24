@@ -1,7 +1,13 @@
 <?php
+// Configure session settings BEFORE starting the session
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1); // Enable this if using HTTPS
+ini_set('session.use_strict_mode', 1);
+
 // Start session only if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+    session_regenerate_id(true); // Regenerate session ID to prevent session fixation
 }
 
 // Redirect if not logged in
@@ -23,11 +29,15 @@ try {
     $pdo = new PDO('mysql:host=localhost;dbname=npa_training', 'root', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    error_log("Database connection failed: " . $e->getMessage());
+    die("An error occurred. Please try again later.");
 }
 
 // Handle delete request with validation
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
+    if (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Invalid CSRF token.");
+    }
     $id = (int)$_GET['delete'];
     $stmt = $pdo->prepare("DELETE FROM participants WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -37,7 +47,8 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 }
 
 // Handle search query with validation
-$search = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$search = htmlspecialchars($search, ENT_QUOTES, 'UTF-8');
 $query = "SELECT * FROM participants";
 if ($search) {
     $query .= " WHERE name LIKE :search OR personal_number LIKE :search";
@@ -89,8 +100,12 @@ $statusDistribution = $statusStmt->fetchAll(PDO::FETCH_ASSOC);
 function escape($data) {
     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 }
-?>
 
+// Generate a CSRF token
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -410,29 +425,31 @@ function escape($data) {
         <!-- Charts Container -->
         <div class="charts-container">
             <!-- Training Types Chart -->
-            <div class="chart-container">
+            <div class="chart-container" style="height: 300px;">
                 <canvas id="trainingChart"></canvas>
             </div>
 
             <!-- Status Distribution Chart -->
-            <div class="chart-container">
+            <div class="chart-container" style="height: 300px;">
                 <canvas id="statusChart"></canvas>
             </div>
         </div>
 
         <!-- Add Participant Button -->
-        <a href="add_participant.php" class="add-participant-btn">Add Participant</a>
+        <a href="add_participant.php" class="add-participant-btn">
+            <i class="fas fa-plus"></i> Add Participant
+        </a>
 
         <!-- Participants Table -->
         <table>
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Personal Number</th>
-                    <th>Oracle Number<th>
+                    <th>P/N</th>
+                    <th>O/N</th>
                     <th>Designation</th>
-                    <th>Location</th>
-                    <th>Venue</th> <!-- Added Venue field -->
+                    <th>Participant Location</th>
+                    <th>Course Location</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -445,10 +462,10 @@ function escape($data) {
                             <td><?= escape($participant['oracle_number']) ?></td>
                             <td><?= escape($participant['designation']) ?></td>
                             <td><?= escape($participant['location']) ?></td>
-                            <td><?= escape($participant['venue']) ?></td> <!-- Added Venue field -->
+                            <td><?= escape($participant['venue']) ?></td>
                             <td class="actions">
                                 <a href="edit_participant.php?id=<?= escape($participant['id']) ?>" class="edit">Edit</a>
-                                <a href="?delete=<?= escape($participant['id']) ?>" class="delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="?delete=<?= escape($participant['id']) ?>&csrf_token=<?= escape($_SESSION['csrf_token']) ?>" class="delete" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
