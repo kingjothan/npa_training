@@ -339,11 +339,11 @@ $pdo = null;
                         <td><?= escape($user['designation']) ?></td>
                     </tr>
                     <tr>
-                        <th>Location</th>
+                        <th>Participant Location</th>
                         <td><?= escape($user['location']) ?></td>
                     </tr>
                     <tr>
-                        <th>Venue</th> <!-- Added Venue field -->
+                        <th>Course Location</th> <!-- Added Venue field -->
                         <td><?= escape($user['venue']) ?></td>
                     </tr>
                     <tr>
@@ -384,7 +384,7 @@ $pdo = null;
                         <td><?= isset($user['consultant_name']) ? escape($user['consultant_name']) : 'N/A' ?></td>
                     </tr>
                     <tr>
-                        <th>Amount for Consultation</th>
+                        <th>Consultant Fee</th>
                         <td><?= isset($user['consultation_amount']) ? escape($user['consultation_amount']) : 'N/A' ?></td>
                     </tr>
                     <tr>
@@ -487,8 +487,8 @@ $pdo = null;
                 { label: "Personal Number", value: '<?= escape($user['personal_number']) ?>' },
                 { label: "Oracle Number", value: '<?= isset($user['oracle_number']) ? escape($user['oracle_number']) : 'N/A' ?>' },
                 { label: "Designation", value: '<?= escape($user['designation']) ?>' },
-                { label: "Location", value: '<?= escape($user['location']) ?>' },
-                { label: "Venue", value: '<?= escape($user['venue']) ?>' }, // Added Venue field
+                { label: "Participant Location", value: '<?= escape($user['location']) ?>' },
+                { label: "Course Location", value: '<?= escape($user['venue']) ?>' }, // Added Venue field
                 { label: "Training Description", value: '<?= escape($user['training_description']) ?>' },
                 { label: "Start Date", value: '<?= escape($user['start_date']) ?>' },
                 { label: "Completion Date", value: '<?= escape($user['completion_date']) ?>' },
@@ -497,7 +497,7 @@ $pdo = null;
                 { label: "Training Type", value: '<?= escape($user['training_type']) ?>' },
                 { label: "Total Cost", value: '<?= escape($user['total_cost_of_participation']) ?>' },
                 { label: "Name of Consultant", value: '<?= isset($user['consultant_name']) ? escape($user['consultant_name']) : 'N/A' ?>' },
-                { label: "Amount for Consultation", value: '<?= isset($user['consultation_amount']) ? escape($user['consultation_amount']) : 'N/A' ?>' },
+                { label: "Consultant Fee", value: '<?= isset($user['consultation_amount']) ? escape($user['consultation_amount']) : 'N/A' ?>' },
                 { label: "Remark", value: '<?= escape($user['remark']) ?>' }
             ];
 

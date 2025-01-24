@@ -192,10 +192,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="designation">Designation</label>
             <input type="text" id="designation" name="designation" required>
 
-            <label for="location">Location</label>
+            <label for="location">Participant Location</label>
             <input type="text" id="location" name="location" required>
 
-            <label for="venue">Venue</label> <!-- Added Venue field -->
+            <label for="venue">Course Location</label> <!-- Added Venue field -->
             <input type="text" id="venue" name="venue" required>
 
             <label for="training_description">Training Description</label>
@@ -260,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="consultant_name">Name of Consultant</label>
             <input type="text" id="consultant_name" name="consultant_name" required>
 
-            <label for="consultation_amount">Amount for Consultation</label>
+            <label for="consultation_amount">Consultant Fee</label>
             <input type="number" id="consultation_amount" name="consultation_amount" step="0.01" required>
 
             <label for="remark">Remark</label>

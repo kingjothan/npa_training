@@ -195,10 +195,10 @@ function escape($data) {
             <label for="designation">Designation</label>
             <input type="text" id="designation" name="designation" value="<?= escape($participant['designation']) ?>" required>
 
-            <label for="location">Location</label>
+            <label for="location">Particitant Location</label>
             <input type="text" id="location" name="location" value="<?= escape($participant['location']) ?>" required>
 
-            <label for="venue">Venue</label> <!-- Added Venue field -->
+            <label for="venue">Course Location</label> <!-- Added Venue field -->
             <input type="text" id="venue" name="venue" value="<?= escape($participant['venue']) ?>" required>
 
             <label for="training_description">Training Description</label>
@@ -233,7 +233,7 @@ function escape($data) {
             <label for="consultant_name">Name of Consultant</label>
             <input type="text" id="consultant_name" name="consultant_name" value="<?= escape($participant['consultant_name']) ?>" required>
 
-            <label for="consultation_amount">Amount for Consultation</label>
+            <label for="consultation_amount">Consultant Fee</label>
             <input type="number" id="consultation_amount" name="consultation_amount" value="<?= escape($participant['consultation_amount']) ?>" required>
 
             <label for="remark">Remark</label>

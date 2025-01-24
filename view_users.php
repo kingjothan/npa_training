@@ -340,13 +340,14 @@ $total_consultation_amount_all = 0; // New variable for total consultation amoun
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Personal Number</th>
-                    <th>Location</th>
-                    <th>Venue</th> <!-- Added Venue field -->
+                    <th>P/N</th>
+                    <th>O/N</th>
+                    <th>Participant Location</th>
+                    <th>Course Location</th> <!-- Added Venue field -->
                     <th>Status</th>
                     <th>Training Description</th>
                     <th>Total Cost</th>
-                    <th>Consultation Amount</th>
+                    <th>Consultant fee</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -361,6 +362,7 @@ $total_consultation_amount_all = 0; // New variable for total consultation amoun
                         <tr>
                             <td><?= htmlspecialchars($row['name']) ?></td>
                             <td><?= htmlspecialchars($row['personal_number']) ?></td>
+                            <td><?= htmlspecialchars($row['oracle_number']) ?></td>
                             <td><?= htmlspecialchars($row['location']) ?></td>
                             <td><?= htmlspecialchars($row['venue']) ?></td> <!-- Added Venue field -->
                             <td><?= htmlspecialchars($row['status']) ?></td>
@@ -381,7 +383,7 @@ $total_consultation_amount_all = 0; // New variable for total consultation amoun
         <!-- Display Total Cost and Total Consultation Amount -->
         <div class="total-cost" id="printable-total-cost">
             <p>Total Cost of Participation for All Participants: <strong><?= number_format($total_cost_of_participation_all, 2) ?></strong></p>
-            <p>Total Consultation Amount: <strong><?= number_format($total_consultation_amount_all, 2) ?></strong></p>
+            <p>Total Consultant fee: <strong><?= number_format($total_consultation_amount_all, 2) ?></strong></p>
         </div>
 
         <!-- Pagination -->

@@ -429,6 +429,7 @@ function escape($data) {
                 <tr>
                     <th>Name</th>
                     <th>Personal Number</th>
+                    <th>Oracle Number<th>
                     <th>Designation</th>
                     <th>Location</th>
                     <th>Venue</th> <!-- Added Venue field -->
@@ -441,6 +442,7 @@ function escape($data) {
                         <tr>
                             <td><?= escape($participant['name']) ?></td>
                             <td><?= escape($participant['personal_number']) ?></td>
+                            <td><?= escape($participant['oracle_number']) ?></td>
                             <td><?= escape($participant['designation']) ?></td>
                             <td><?= escape($participant['location']) ?></td>
                             <td><?= escape($participant['venue']) ?></td> <!-- Added Venue field -->

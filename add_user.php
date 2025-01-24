@@ -236,8 +236,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" name="consultant_name" id="consultant_name" class="form-control" placeholder="Enter Consultant Name" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="consultation_amount" class="form-label">Amount for Consultation</label>
-                    <input type="number" name="consultation_amount" id="consultation_amount" class="form-control" step="0.01" placeholder="Enter Consultation Amount" required>
+                    <label for="consultation_amount" class="form-label">Consultant Fee</label>
+                    <input type="number" name="consultation_amount" id="consultation_amount" class="form-control" step="0.01" placeholder="Enter Consultant Fee" required>
                 </div>
             </div>
 
@@ -247,15 +247,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" name="designation" id="designation" class="form-control" placeholder="Enter designation">
                 </div>
                 <div class="col-md-6">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" name="location" id="location" class="form-control" placeholder="Enter location">
+                    <label for="location" class="form-label">Participant Location</label>
+                    <input type="text" name="location" id="location" class="form-control" placeholder="Enter Participant Location">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="venue" class="form-label">Venue</label> <!-- Added Venue field -->
-                    <input type="text" name="venue" id="venue" class="form-control" placeholder="Enter venue" required>
+                    <label for="venue" class="form-label">Course Location</label> <!-- Added Venue field -->
+                    <input type="text" name="venue" id="venue" class="form-control" placeholder="Enter Course Location" required>
                 </div>
             </div>
 
